@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!-- Force compact desktop view on mobile -->
+    <!-- Desktop view width with zoom enabled -->
     <meta name="viewport" content="width=985, initial-scale=1.0">
     <title>Magic Space</title>
     <style>
@@ -32,7 +32,7 @@
             display: flex;
             align-items: stretch;
             gap: 24px;
-            width: 925px; /* Fixed width to keep side-by-side view on all screens */
+            width: 925px;
         }
 
         .card {
@@ -257,12 +257,12 @@
     <a href="https://www.instagram.com/herosalman1_929/" target="_blank" class="creator-tag">Made by : @Herosalman1</a>
 
     <script>
-        // Disable Right-Click (3 dots / Inspect options context menu block)[cite: 1, 2]
+        // Disable Right-Click[cite: 3]
         document.addEventListener('contextmenu', function (e) {
             e.preventDefault();
         });
 
-        // Disable DevTools Shortcuts (F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+Shift+C, Ctrl+U)[cite: 1, 2]
+        // Disable DevTools Shortcuts[cite: 3]
         document.addEventListener('keydown', function (e) {
             if (
                 e.key === 'F12' ||
@@ -274,14 +274,7 @@
             }
         });
 
-        // Block Zoom via Wheel or Trackpad gestures[cite: 1, 2]
-        document.addEventListener('wheel', function (e) {
-            if (e.ctrlKey) {
-                e.preventDefault();
-            }
-        }, { passive: false });
-
-        const invisibleChar = "\u200B";[cite: 1, 2]
+        const invisibleChar = "\u200B";[cite: 3]
 
         function updatePreviewInput() {
             let val = document.getElementById('repeatCount').value;
@@ -291,6 +284,9 @@
                 count = 100000;
                 document.getElementById('repeatCount').value = 100000;
             }
+
+            document.getElementById('charCount').innerText = count.toLocaleString();
+            document.getElementById('lineCount').innerText = count.toLocaleString();
         }
 
         function generateText() {
