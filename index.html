@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!-- Force Desktop Viewport at 985px and Block Zoom -->
-    <meta name="viewport" content="width=985, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- Standard Responsive Viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Magic Space</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
@@ -26,7 +26,6 @@
             align-items: center;
             min-height: 100vh;
             padding: 20px;
-            touch-action: pan-x pan-y;
         }
 
         .container {
@@ -206,6 +205,13 @@
 
         .creator-tag:hover {
             color: #38ef7d;
+        }
+
+        /* Mobile Responsive View (Stacked Cards) */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
