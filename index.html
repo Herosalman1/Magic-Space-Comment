@@ -2,8 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!-- Desktop view width with zoom enabled -->
-    <meta name="viewport" content="width=985, initial-scale=1.0">
+    <meta name="viewport" content="width=985">
     <title>Magic Space</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
@@ -26,13 +25,17 @@
             align-items: center;
             min-height: 100vh;
             padding: 20px;
+            width: 100%;
+            overflow-x: hidden; /* Side scroll completely removed */
         }
 
         .container {
             display: flex;
             align-items: stretch;
             gap: 24px;
-            width: 925px;
+            max-width: 985px;
+            width: 985px;
+            margin: 0 auto;
         }
 
         .card {
@@ -68,7 +71,7 @@
             margin-bottom: 10px;
         }
 
-        /* Normal Clean Input Box Styling */
+        /* Number input field with spinners/arrows removed */
         input[type="number"] {
             width: 100%;
             background: #1b1734;
@@ -81,6 +84,18 @@
             transition: all 0.2s ease;
             -webkit-user-select: text;
             user-select: text;
+        }
+
+        /* Remove default spinner arrows for Chrome, Safari, Edge, Opera */
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button { 
+            -webkit-appearance: none; 
+            margin: 0; 
+        }
+
+        /* Remove default spinner arrows for Firefox */
+        input[type=number] {
+            -moz-appearance: textfield;
         }
 
         input[type="number"]::placeholder {
@@ -127,19 +142,16 @@
             opacity: 0.9;
         }
 
-        /* Generate Button Style */
         .btn-generate {
             background: linear-gradient(135deg, #11998e, #38ef7d);
             box-shadow: 0 4px 15px rgba(56, 239, 125, 0.3);
         }
 
-        /* Copy Button Style */
         .btn-copy {
             background: linear-gradient(135deg, #00c6ff, #0072ff);
             box-shadow: 0 4px 15px rgba(0, 114, 255, 0.3);
         }
 
-        /* Clear Button Style */
         .btn-clear {
             background: linear-gradient(135deg, #654ea3, #eaafc8);
             box-shadow: 0 4px 15px rgba(101, 78, 163, 0.3);
@@ -159,7 +171,6 @@
             margin-top: auto; 
         }
 
-        /* Live Preview Card */
         .preview-box {
             background: #1b1734;
             border: 1.5px dashed rgba(255, 255, 255, 0.1);
@@ -191,7 +202,6 @@
             color: #38ef7d;
         }
 
-        /* Creator Tag */
         .creator-tag {
             margin-top: 35px;
             font-size: 0.85rem;
@@ -210,13 +220,11 @@
 <body>
 
     <div class="container">
-        <!-- Controls Section -->
         <div class="card">
             <div class="card-title">
                 ⚡ Magic Space
             </div>
 
-            <!-- Repeat count input box -->
             <div class="form-group">
                 <label>Repeat count (1 – 1,00,000)</label>
                 <input type="number" id="repeatCount" placeholder="e.g... 500" min="1" max="100000" oninput="updatePreviewInput()">
@@ -226,7 +234,6 @@
                 </div>
             </div>
 
-            <!-- Action Buttons -->
             <div class="btn-container">
                 <button class="btn btn-generate" id="genBtn" onclick="generateText()">✨ Generate</button>
                 <button class="btn btn-copy" id="copyBtn" onclick="copyText()">📋 Copy</button>
@@ -238,7 +245,6 @@
             </div>
         </div>
 
-        <!-- Live Preview Section -->
         <div class="card">
             <div class="card-title">
                 👀 Live Preview
@@ -253,16 +259,13 @@
         </div>
     </div>
 
-    <!-- Creator Tag -->
     <a href="https://www.instagram.com/herosalman1_929/" target="_blank" class="creator-tag">Made by : @Herosalman1</a>
 
     <script>
-        // Disable Right-Click[cite: 3]
         document.addEventListener('contextmenu', function (e) {
             e.preventDefault();
         });
 
-        // Disable DevTools Shortcuts[cite: 3]
         document.addEventListener('keydown', function (e) {
             if (
                 e.key === 'F12' ||
@@ -274,7 +277,13 @@
             }
         });
 
-        const invisibleChar = "\u200B";[cite: 3]
+        document.addEventListener('wheel', function (e) {
+            if (e.ctrlKey) {
+                e.preventDefault();
+            }
+        }, { passive: false });
+
+        const invisibleChar = "\u200B"; 
 
         function updatePreviewInput() {
             let val = document.getElementById('repeatCount').value;
@@ -284,9 +293,6 @@
                 count = 100000;
                 document.getElementById('repeatCount').value = 100000;
             }
-
-            document.getElementById('charCount').innerText = count.toLocaleString();
-            document.getElementById('lineCount').innerText = count.toLocaleString();
         }
 
         function generateText() {
