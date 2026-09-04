@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!-- Force compact desktop view on mobile -->
-    <meta name="viewport" content="width=985, initial-scale=1.0">
+    <!-- Force Fixed Desktop Viewport on Mobile to Prevent Zoom and Keep Centered Side-by-Side View -->
+    <meta name="viewport" content="width=985, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Magic Space</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
@@ -26,13 +26,14 @@
             align-items: center;
             min-height: 100vh;
             padding: 20px;
+            touch-action: pan-x pan-y;
         }
 
         .container {
             display: flex;
             align-items: stretch;
             gap: 24px;
-            width: 925px; /* Fixed width to keep side-by-side view on all screens */
+            width: 925px;
         }
 
         .card {
