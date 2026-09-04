@@ -16,17 +16,22 @@
             user-select: none;
         }
 
-        body {
+        html, body {
+            height: 100vh;
+            height: 100dvh;
             background: #1b1734;
             color: #fff;
+            overflow: hidden; /* Blocks both vertical and horizontal scrolling */
+            position: fixed;
+            width: 100%;
+        }
+
+        body {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
             padding: 20px;
-            width: 100%;
-            overflow-x: hidden; /* Side scroll completely removed */
         }
 
         .container {
@@ -203,7 +208,7 @@
         }
 
         .creator-tag {
-            margin-top: 35px;
+            margin-top: 25px;
             font-size: 0.85rem;
             font-weight: 600;
             color: #8f8cb0;
